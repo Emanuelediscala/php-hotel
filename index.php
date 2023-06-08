@@ -48,49 +48,53 @@ $hotels = [
     ],
 
 ];
+$parkingGet = $_GET["Parcheggio"];
+var_dump($parkingGet)
+
 ?>
 
 <body>
     <main>
         <Header>
             <div class="p-3">
-                <h3 class="text-center">I TOP HOTEL VICINO CASA DI PATRICK</h3>
-                <table class="table">
+                <h3 class="text-center">I TOP HOTEL VICINO CASA DI PATRIK</h3>
+                <table class="table m-auto">
                     <thead>
-                        <tr>
-                            <?php foreach ($hotels as $key => $value)
-                                var_dump($key) ?>
-
-                            <th scope="col"><?php ?></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                        <tr class="text-center">
+                            <?php foreach ($hotels[0] as $HotelAttribute => $attribute) { ?>
+                                <th scope="col"><?php echo $HotelAttribute ?></th>
+                            <?php } ?>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
+                    <?php foreach ($hotels as $attribute) {
+                        $park = $attribute["parking"] ? "yes" : "no";
+                    ?>
+                        <tbody>
+                            <div> <?php if ($parkingGet == $park) { ?>
+                                <tr class="text-center">
+                                        <td><?php echo $attribute["name"] ?></td>
+                                        <td><?php echo $attribute["description"] ?></td>
+                                        <td><?php echo $park ?></td>
+                                        <td><?php echo $attribute["vote"] ?></td>
+                                        <td><?php echo $attribute["distance_to_center"] ?></td>
+                                    <?php } else ?>
+                                </div>
+                            <?php } ?>
+                            </tr>
+                        </tbody>
                 </table>
             </div>
         </Header>
+        <main>
+            <form action="index.php" method="get">
+                <h3 class="d-inline-block me-3">Cerchi un hotel con Parcheggio</h3>
+                <select name="Parcheggio" id="">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <button type="submit">Invia</button>
+            </form>
+        </main>
     </main>
 
 
