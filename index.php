@@ -78,7 +78,13 @@ $StarsGet = $_GET["stars"];
                                         <td><?php echo $park ?></td>
                                         <td><?php echo $attribute["vote"] ?></td>
                                         <td><?php echo $attribute["distance_to_center"] ?></td>
-                                    <?php } ?>
+                                    <?php }  else if (!isset($parkingGet) && !isset($StarsGet)) { ?>
+                                        <td><?php echo $attribute["name"] ?></td>
+                                        <td><?php echo $attribute["description"] ?></td>
+                                        <td><?php echo $park ?></td>
+                                        <td><?php echo $attribute["vote"] ?></td>
+                                        <td><?php echo $attribute["distance_to_center"] ?></td>
+                                        <?php } ?>
                             </div>
                         <?php } ?>
                         </tr>
