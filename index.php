@@ -35,7 +35,7 @@ $hotels = [
     [
         'name' => 'Hotel Bellavista',
         'description' => 'Hotel Bellavista Descrizione',
-        'parking' => false,
+        'parking' => true,
         'vote' => 5,
         'distance_to_center' => 5.5
     ],
@@ -49,10 +49,9 @@ $hotels = [
 
 ];
 $parkingGet = $_GET["Parcheggio"];
-var_dump($parkingGet)
+$StarsGet = $_GET["stars"];
 
 ?>
-
 <body>
     <main>
         <Header>
@@ -68,19 +67,21 @@ var_dump($parkingGet)
                     </thead>
                     <?php foreach ($hotels as $attribute) {
                         $park = $attribute["parking"] ? "yes" : "no";
+                        $vote = $attribute["vote"];
                     ?>
                         <tbody>
-                            <div> <?php if ($parkingGet == $park) { ?>
-                                <tr class="text-center">
+                            <div> <?php if ($parkingGet == $park && $StarsGet <= $vote) {
+                            ?>
+                                    <tr class="text-center">
                                         <td><?php echo $attribute["name"] ?></td>
                                         <td><?php echo $attribute["description"] ?></td>
                                         <td><?php echo $park ?></td>
                                         <td><?php echo $attribute["vote"] ?></td>
                                         <td><?php echo $attribute["distance_to_center"] ?></td>
-                                    <?php } else ?>
-                                </div>
-                            <?php } ?>
-                            </tr>
+                                    <?php } ?>
+                            </div>
+                        <?php } ?>
+                        </tr>
                         </tbody>
                 </table>
             </div>
@@ -91,7 +92,10 @@ var_dump($parkingGet)
                 <select name="Parcheggio" id="">
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
-                </select>
+                </select><br>
+                <h3 class="d-inline-block">Stars Level</h3>
+                <input type="number" required name="stars" min="1" max="5">
+                <br>
                 <button type="submit">Invia</button>
             </form>
         </main>
